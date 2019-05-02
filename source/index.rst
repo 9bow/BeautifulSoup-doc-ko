@@ -1,53 +1,45 @@
-Beautiful Soup Documentation
+Beautiful Soup 문서
 ============================
 
 .. image:: 6.1.jpg
    :align: right
    :alt: "The Fish-Footman began by producing from under his arm a great letter, nearly as large as himself."
 
-`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ is a
-Python library for pulling data out of HTML and XML files. It works
-with your favorite parser to provide idiomatic ways of navigating,
-searching, and modifying the parse tree. It commonly saves programmers
-hours or days of work.
+`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ 은 HTML 및 XML 파일에서
+데이터를 추출하기 위한 Python Library입니다. 이는 사용자가 선호하는 파서(parser)와 함께
+구문 분석 트리(Parse Tree)를 탐색하거나 검색, 수정하는 자연스러운(idiomatic) 방법을
+제공합니다. 이 도구는 일반적으로 프로그래머의 수 시간 또는 수 일에 걸친 작업을 절약해줍니다.
 
-These instructions illustrate all major features of Beautiful Soup 4,
-with examples. I show you what the library is good for, how it works,
-how to use it, how to make it do what you want, and what to do when it
-violates your expectations.
+본 설명서는 Beautiful Soup 4의 주요한 기능들을 사용하는 방법을 예제를 이용하여 보여줍니다.
+이 Library가 왜 좋은지와 어떻게 동작하는지, 어떻게 사용하는지, 그리고 어떻게 원하는대로
+동작하게 하는지와 예상 밖의 동작을 할 때 무엇을 해야 하는지를 보여줄 것입니다.
 
-The examples in this documentation should work the same way in Python
-2.7 and Python 3.2.
+이 문서 상의 예제들은 Python 2.7과 Python 3.2에서 동일하게 동작합니다.
 
-You might be looking for the documentation for `Beautiful Soup 3
-<http://www.crummy.com/software/BeautifulSoup/bs3/documentation.html>`_.
-If so, you should know that Beautiful Soup 3 is no longer being
-developed, and that Beautiful Soup 4 is recommended for all new
-projects. If you want to learn about the differences between Beautiful
-Soup 3 and Beautiful Soup 4, see `Porting code to BS4`_.
+만약 `Beautiful Soup 3 <http://www.crummy.com/software/BeautifulSoup/bs3/documentation.html>`_ 용
+문서를 찾고 있다면, Beautiful Soup 3는 더 이상 개발되고 있지 않으며 새로운 프로젝트를 위해서는
+Beautiful Soup 4를 권장하고 있다는 것을 알아주시기 바랍니다. Beautiful Soup 3와 Beautiful Soup 4
+간의 차이점을 알고 싶다면, `Porting code to BS4`_ 을 보십시오.
 
-This documentation has been translated into other languages by
-Beautiful Soup users:
+이 문서는 또한 Beautiful Soup 사용자들에 의해 다음의 언어들로 번역되었습니다:
 
 * `这篇文档当然还有中文版. <http://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/>`_
 * このページは日本語で利用できます(`外部リンク <http://kondou.com/BS4/>`_)
-* 이 문서는 한국어 번역도 가능합니다. (`외부 링크 <http://coreapython.hosting.paran.com/etc/beautifulsoup4.html>`_)
+* 이 문서의 한국어 번역입니다. (`외부 링크 <https://9bow.github.io/BeautifulSoup-doc-ko/>`_)
 
-Getting help
+도움얻기
 ------------
 
-If you have questions about Beautiful Soup, or run into problems,
-`send mail to the discussion group
-<https://groups.google.com/forum/?fromgroups#!forum/beautifulsoup>`_. If
-your problem involves parsing an HTML document, be sure to mention
-:ref:`what the diagnose() function says <diagnose>` about
-that document.
+Beautiful Soup 관련한 질문이나 문제점이 있다면
+`토론 그룹에 메일을 보내주세요 <https://groups.google.com/forum/?fromgroups#!forum/beautifulsoup>`_.
+만약 HTML 문서 파싱(parsing)과 관련된 문제라면 :ref:`diagnose() 함수가 문서에 대해 뭐라고 <diagnose>`
+했는지를 꼭 언급해주시기 바랍니다.
 
-Quick Start
+
+빠른 시작
 ===========
 
-Here's an HTML document I'll be using as an example throughout this
-document. It's part of a story from `Alice in Wonderland`::
+이 문서에서 사용할 예제 HTML 문서로, `이상한 나라의 앨리스` 의 일부입니다. ::
 
  html_doc = """
  <html><head><title>The Dormouse's story</title></head>
@@ -63,9 +55,8 @@ document. It's part of a story from `Alice in Wonderland`::
  <p class="story">...</p>
  """
 
-Running the "three sisters" document through Beautiful Soup gives us a
-``BeautifulSoup`` object, which represents the document as a nested
-data structure::
+Beautiful Soup으로 이 "세 자매" 문서를 실행하면, 문서가 중첩된 데이터 구조로 표현된
+``BeautifulSoup`` 객체를 반환받습니다.
 
  from bs4 import BeautifulSoup
  soup = BeautifulSoup(html_doc, 'html.parser')
@@ -104,7 +95,7 @@ data structure::
  #  </body>
  # </html>
 
-Here are some simple ways to navigate that data structure::
+다음은 데이터 구조를 탐색하는 몇 가지 간단한 방법들입니다. ::
 
  soup.title
  # <title>The Dormouse's story</title>
@@ -135,7 +126,7 @@ Here are some simple ways to navigate that data structure::
  soup.find(id="link3")
  # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>
 
-One common task is extracting all the URLs found within a page's <a> tags::
+일반적인 작업 중 하나인 페이지 내의 <a> 태그에 있는 모든 URL을 추출하는 것을 해보겠습니다. ::
 
  for link in soup.find_all('a'):
      print(link.get('href'))
@@ -143,7 +134,7 @@ One common task is extracting all the URLs found within a page's <a> tags::
  # http://example.com/lacie
  # http://example.com/tillie
 
-Another common task is extracting all the text from a page::
+또다른 일반적인 작업인 페이지 내의 모든 글자들을 가져오는 것을 해보겠습니다. ::
 
  print(soup.get_text())
  # The Dormouse's story
@@ -158,50 +149,47 @@ Another common task is extracting all the text from a page::
  #
  # ...
 
-Does this look like what you need? If so, read on.
+필요로 했던게 이거 같아 보이나요? 맞다면, 계속 읽어보시죠.
 
-Installing Beautiful Soup
+Beautiful Soup 설치
 =========================
 
-If you're using a recent version of Debian or Ubuntu Linux, you can
-install Beautiful Soup with the system package manager:
+최신 버전의 Debian 또는 Ubuntu Linux를 사용 중이라면, 시스템 패키지 관리자를
+이용하여 Beautiful Soup을 설치하실 수 있습니다:
 
 :kbd:`$ apt-get install python-bs4` (for Python 2)
 
 :kbd:`$ apt-get install python3-bs4` (for Python 3)
 
-Beautiful Soup 4 is published through PyPi, so if you can't install it
-with the system packager, you can install it with ``easy_install`` or
-``pip``. The package name is ``beautifulsoup4``, and the same package
-works on Python 2 and Python 3. Make sure you use the right version of
-``pip`` or ``easy_install`` for your Python version (these may be named
-``pip3`` and ``easy_install3`` respectively if you're using Python 3).
+Beautiful Soup 4는 PyPI를 통해 공개되므로, 시스탬 패키지 관리자를 이용할 수 없을
+때에는 ``easy_install`` 또는 ``pip`` 를 이용하여 설치할 수 있습니다. 패키지 이름은
+``beautifulsoup4`` 이며, Python 2와 Python 3 모두 동일한 패키지가 동작합니다.
+설치된 Python 버전에 맞는 ``pip`` 또는 ``easy_install`` 을 사용해야 함을 유념하십시오.
+(Python 3의 경우 ``pip3`` 또는 ``easy_install3`` 라는 이름을 사용하기도 합니다.)
 
 :kbd:`$ easy_install beautifulsoup4`
 
 :kbd:`$ pip install beautifulsoup4`
 
-(The ``BeautifulSoup`` package is probably `not` what you want. That's
-the previous major release, `Beautiful Soup 3`_. Lots of software uses
-BS3, so it's still available, but if you're writing new code you
-should install ``beautifulsoup4``.)
+(``BeautifulSoup`` 패키지는 아마 원하시는 것이 ``아닐 것`` 입니다. 이는 이전 버전의
+`Beautiful Soup 3`_ 입니다. 많은 소프트웨어들이 BS3를 사용하므로, 아직 사용 가능하지만
+새로운 코드를 작성한다면 ``beautifulsoup4`` 를 설치하십시오.)
 
-If you don't have ``easy_install`` or ``pip`` installed, you can
-`download the Beautiful Soup 4 source tarball
-<http://www.crummy.com/software/BeautifulSoup/download/4.x/>`_ and
-install it with ``setup.py``.
+만약 ``easy_install`` 이나 ``pip`` 가 설치되어 있지 않다면,
+`Beautiful Soup 4를 소스코드로 다운로드 <http://www.crummy.com/software/BeautifulSoup/download/4.x/>`_
+하신 뒤에 ``setup.py`` 를 이용하여 설치할 수 있습니다.
 
 :kbd:`$ python setup.py install`
 
-If all else fails, the license for Beautiful Soup allows you to
-package the entire library with your application. You can download the
-tarball, copy its ``bs4`` directory into your application's codebase,
-and use Beautiful Soup without installing it at all.
+Beautiful Soup의 라이선스는 이 모든 것들이 실패했을 경우, 어플리케이션에 전체
+라이브러리를 탑재하여 패키징하는 것을 허용합니다. 소스 코드를 다운로드 받은 후,
+``bs4`` 디렉토리를 만들려는 어플리케이션의 소스 코드에 복사하고 설치 없이
+Beautiful Soup을 사용할 수 있습니다.
 
-I use Python 2.7 and Python 3.2 to develop Beautiful Soup, but it
-should work with other recent versions.
+Beautiful Soup 개발을 위해 Python 2.7과 Python 3.2를 사용하였지만, 다른 최신
+버전에서도 작동합니다.
 
-Problems after installation
+설치 후 문제
 ---------------------------
 
 Beautiful Soup is packaged as Python 2 code. When you install it for
@@ -405,7 +393,7 @@ of a multi-valued attribute as a list::
  css_soup = BeautifulSoup('<p class="body"></p>')
  css_soup.p['class']
  # ["body"]
-  
+
  css_soup = BeautifulSoup('<p class="body strikeout"></p>')
  css_soup.p['class']
  # ["body", "strikeout"]
@@ -433,7 +421,7 @@ string, whether or not it's a multi-valued atribute
 
   id_soup.p.get_attribute_list('id')
   # ["my id"]
- 
+
 If you parse a document as XML, there are no multi-valued attributes::
 
  xml_soup = BeautifulSoup('<p class="body strikeout"></p>', 'xml')
@@ -1804,7 +1792,7 @@ abbreviations::
  namespaces = dict(first="http://namespace1/", second="http://namespace2/")
  soup.select("second|child", namespaces=namespaces)
  # [<ns1:child>I'm in namespace 2</ns1:child>]
- 
+
 All this CSS selector stuff is a convenience for people who already
 know the CSS selector syntax. You can do all of this with the
 Beautiful Soup API. And if CSS selectors are all you need, you should
@@ -1884,7 +1872,7 @@ Python list::
    # <html><head></head><body><a>Soup's on</a></body></html>
    soup.a.contents
    # [u'Soup', u''s', u' ', u'on']
-   
+
 ``NavigableString()`` and ``.new_tag()``
 -------------------------------------------------
 
@@ -2221,13 +2209,13 @@ Unicode characters to HTML entities whenever possible::
 omit the closing slash in HTML void tags like "br"::
 
  soup = BeautifulSoup("<br>")
- 
+
  print(soup.encode(formatter="html"))
  # <html><body><br/></body></html>
- 
+
  print(soup.encode(formatter="html5"))
  # <html><body><br></body></html>
- 
+
 If you pass in ``formatter=None``, Beautiful Soup will not modify
 strings at all on output. This is the fastest option, but it may lead
 to Beautiful Soup generating invalid HTML/XML, as in these examples::
