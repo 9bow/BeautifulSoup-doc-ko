@@ -39,7 +39,7 @@ Beautiful Soup 관련한 질문이나 문제점이 있다면
 빠른 시작
 ===========
 
-이 문서에서 사용할 예제 HTML 문서로, `이상한 나라의 앨리스` 의 일부입니다. ::
+이 문서에서 사용할 예제 HTML 문서로, `이상한 나라의 앨리스` 의 일부입니다::
 
  html_doc = """
  <html><head><title>The Dormouse's story</title></head>
@@ -95,7 +95,7 @@ Beautiful Soup으로 이 "세 자매" 문서를 실행하면, 문서가 중첩�
  #  </body>
  # </html>
 
-다음은 데이터 구조를 탐색하는 몇 가지 간단한 방법들입니다. ::
+다음은 데이터 구조를 탐색하는 몇 가지 간단한 방법들입니다::
 
  soup.title
  # <title>The Dormouse's story</title>
@@ -126,7 +126,7 @@ Beautiful Soup으로 이 "세 자매" 문서를 실행하면, 문서가 중첩�
  soup.find(id="link3")
  # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>
 
-일반적인 작업 중 하나인 페이지 내의 <a> 태그에 있는 모든 URL을 추출하는 것을 해보겠습니다. ::
+일반적인 작업 중 하나인 페이지 내의 <a> 태그에 있는 모든 URL을 추출하는 것을 해보겠습니다::
 
  for link in soup.find_all('a'):
      print(link.get('href'))
@@ -134,7 +134,7 @@ Beautiful Soup으로 이 "세 자매" 문서를 실행하면, 문서가 중첩�
  # http://example.com/lacie
  # http://example.com/tillie
 
-또다른 일반적인 작업인 페이지 내의 모든 글자들을 가져오는 것을 해보겠습니다. ::
+또다른 일반적인 작업인 페이지 내의 모든 글자들을 가져오는 것을 해보겠습니다::
 
  print(soup.get_text())
  # The Dormouse's story
@@ -192,45 +192,39 @@ Beautiful Soup 개발을 위해 Python 2.7과 Python 3.2를 사용하였지만, 
 설치 후 문제
 ---------------------------
 
-Beautiful Soup is packaged as Python 2 code. When you install it for
-use with Python 3, it's automatically converted to Python 3 code. If
-you don't install the package, the code won't be converted. There have
-also been reports on Windows machines of the wrong version being
-installed.
+Beautiful Soup은 Python 2 코드로 패키지되어 있습니다. Python 3용으로 설치하면,
+자동으로 Python 3 코드로 변환됩니다. 패키지를 설치하지 않았다면, 코드가 변환되지
+않습니다. Windows 기기에서 잘못된 버전이 설치되었다는 보고도 있습니다.
 
-If you get the ``ImportError`` "No module named HTMLParser", your
-problem is that you're running the Python 2 version of the code under
-Python 3.
+``ImportError`` "No module named HTMLParser"라는 에러를 봤다면, Python 2 버전의
+코드를 Python 3에서 실행하는 중입니다.
 
-If you get the ``ImportError`` "No module named html.parser", your
-problem is that you're running the Python 3 version of the code under
-Python 2.
+``ImportError`` "No module named html.parser"라는 에러는 Python 3 버전의 코드를
+Python 2에서 실행하기 때문에 발생합니다.
 
-In both cases, your best bet is to completely remove the Beautiful
-Soup installation from your system (including any directory created
-when you unzipped the tarball) and try the installation again.
+두 경우 모두 가장 좋은 방법은 설치된 Beautiful Soup을 (소스 코드를 압축해제하면서
+생긴 디렉토리들까지 포함하여) 완전히 제거하고, 다시 설치를 하는 것입니다.
 
-If you get the ``SyntaxError`` "Invalid syntax" on the line
-``ROOT_TAG_NAME = u'[document]'``, you need to convert the Python 2
-code to Python 3. You can do this either by installing the package:
+``ROOT_TAG_NAME = u'[document]'`` 줄에서 ``SyntaxError`` "Invalid syntax"라는 에러를
+봤다면, Python 2 코드를 Python 3로 변환해야 합니다. 패키지를 설치하여 변환할 수
+있습니다:
 
 :kbd:`$ python3 setup.py install`
 
-or by manually running Python's ``2to3`` conversion script on the
-``bs4`` directory:
+또는 ``bs4`` 디렉토리에서 Python의 ``2to3`` 변환 스크립트를 직접 실행합니다:
 
 :kbd:`$ 2to3-3.2 -w bs4`
 
 .. _parser-installation:
 
 
-Installing a parser
+파서(Parser) 설치
 -------------------
 
-Beautiful Soup supports the HTML parser included in Python's standard
-library, but it also supports a number of third-party Python parsers.
-One is the `lxml parser <http://lxml.de/>`_. Depending on your setup,
-you might install lxml with one of these commands:
+Beautiful Soup은 Python의 표준 라이브러리에 포함된 HTML 파서를 지원하지만,
+그 외에도 다수의 써드파티(thrid-party) 파서들도 지원합니다. 그 중 하나는
+`lxml 파서 <http://lxml.de/>`_ 입니다. 설정에 따라 다음 명령어 중 하나로
+lxml을 설치할 수 있습니다.
 
 :kbd:`$ apt-get install python-lxml`
 
@@ -238,10 +232,9 @@ you might install lxml with one of these commands:
 
 :kbd:`$ pip install lxml`
 
-Another alternative is the pure-Python `html5lib parser
-<http://code.google.com/p/html5lib/>`_, which parses HTML the way a
-web browser does. Depending on your setup, you might install html5lib
-with one of these commands:
+또다른 대안은 순수한 Python의 `html5lib parser
+<http://code.google.com/p/html5lib/>`_ 로, 웹 브라우저처럼 HTML을 파싱(parse)
+합니다. 설정에 따라 다음 중 하나의 명령어로 html5lib을 설치할 수 있습니다.
 
 :kbd:`$ apt-get install python-html5lib`
 
@@ -249,44 +242,43 @@ with one of these commands:
 
 :kbd:`$ pip install html5lib`
 
-This table summarizes the advantages and disadvantages of each parser library:
+이 표에 각 파서 라이브러리의 장점과 단점을 요약하였습니다:
 
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| Parser               | Typical usage                              | Advantages                     | Disadvantages            |
+| 파서(Parser)         | 일반적인 사용법                            | 장점                           | 단점                     |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| Python's html.parser | ``BeautifulSoup(markup, "html.parser")``   | * Batteries included           | * Not very lenient       |
-|                      |                                            | * Decent speed                 |   (before Python 2.7.3   |
-|                      |                                            | * Lenient (as of Python 2.7.3  |   or 3.2.2)              |
-|                      |                                            |   and 3.2.)                    |                          |
+| Python의 html.parser | ``BeautifulSoup(markup, "html.parser")``   | * 건전지 포함(Battery include) | * 매우 관대하지는 않음   |
+|                      |                                            | * 괜찮은 속도                  |   (Python 2.7.3 또는     |
+|                      |                                            | * 관대함 (Python 2.7.3과 3.2)  |   3.2.2 이전)            |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| lxml's HTML parser   | ``BeautifulSoup(markup, "lxml")``          | * Very fast                    | * External C dependency  |
-|                      |                                            | * Lenient                      |                          |
+| lxml의 HTML 파서     | ``BeautifulSoup(markup, "lxml")``          | * 매우 빠름                    | * 외부 C 의존성          |
+|                      |                                            | * 관대함                       |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| lxml's XML parser    | ``BeautifulSoup(markup, "lxml-xml")``      | * Very fast                    | * External C dependency  |
-|                      | ``BeautifulSoup(markup, "xml")``           | * The only currently supported |                          |
-|                      |                                            |   XML parser                   |                          |
+| lxml의 XML 파서      | ``BeautifulSoup(markup, "lxml-xml")``      | * 매우 빠름                    | * 외부 C 의존성          |
+|                      | ``BeautifulSoup(markup, "xml")``           | * 현재 지원되는 유일한 XML     |                          |
+|                      |                                            |   파서                         |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| html5lib             | ``BeautifulSoup(markup, "html5lib")``      | * Extremely lenient            | * Very slow              |
-|                      |                                            | * Parses pages the same way a  | * External Python        |
-|                      |                                            |   web browser does             |   dependency             |
-|                      |                                            | * Creates valid HTML5          |                          |
+| html5lib             | ``BeautifulSoup(markup, "html5lib")``      | * 매우 관대함                  | * 매우 느림              |
+|                      |                                            | * 웹 브라우저와 같은 방식으로  | * 외부 Python 의존성     |
+|                      |                                            |   페이지 파싱                  |                          |
+|                      |                                            | * 유효한 HTML5 생성            |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
 
-If you can, I recommend you install and use lxml for speed. If you're
-using a version of Python 2 earlier than 2.7.3, or a version of Python
-3 earlier than 3.2.2, it's `essential` that you install lxml or
-html5lib--Python's built-in HTML parser is just not very good in older
-versions.
+가능하다면 속도를 고려하여 lxml을 설치하고 사용할 것을 권합니다. 만약 Python 2.7.3
+이전 버전의 Python 2 또는 Python 3.2.2 이전 버전의 Python 3를 사용하고 있다면,
+예전 버전들의 내장 HTML 파서가 좋지 않으므로 lxml 또는 html5lib을 설치하는 것이
+`필수` 입니다.
 
-Note that if a document is invalid, different parsers will generate
-different Beautiful Soup trees for it. See `Differences
-between parsers`_ for details.
+문서가 유효하지 않은 경우에는 서로 다른 파서들이 각각의 서로 다른 Beautiful Soup
+트리를 생성함을 유념하십시오. 자세한 내용은 `Differences between parsers`_ 을
+참고하세요.
 
-Making the soup
+
+soup 생성
 ===============
 
-To parse a document, pass it into the ``BeautifulSoup``
-constructor. You can pass in a string or an open filehandle::
+문서를 파싱하려면, ``BeautifulSoup`` 생성자에 해당 문서를 전달해야 합니다.
+문자열이나 열려있는 파일핸들(filehandle)을 전달할 수 있습니다.
 
  from bs4 import BeautifulSoup
 
@@ -295,73 +287,71 @@ constructor. You can pass in a string or an open filehandle::
 
  soup = BeautifulSoup("<html>data</html>")
 
-First, the document is converted to Unicode, and HTML entities are
-converted to Unicode characters::
+먼저, 문서가 유니코드로 변환된 후 HTML 엔티티(entity)들이 유니코드 문자로
+변환됩니다:
 
  BeautifulSoup("Sacr&eacute; bleu!")
  <html><head></head><body>Sacré bleu!</body></html>
 
-Beautiful Soup then parses the document using the best available
-parser. It will use an HTML parser unless you specifically tell it to
-use an XML parser. (See `Parsing XML`_.)
+그런 다음 Beautiful Soup 은 사용 가능한 최적의 파서를 사용하여 문서를 파싱합니다.
+XML 파서를 따로 사용하도록 지정하지 않는 경우에는 HTML 파서를 이용합니다.
+(`Parsing XML`_ 을 참고하세요.)
 
-Kinds of objects
+객체의 종류
 ================
 
-Beautiful Soup transforms a complex HTML document into a complex tree
-of Python objects. But you'll only ever have to deal with about four
-`kinds` of objects: ``Tag``, ``NavigableString``, ``BeautifulSoup``,
-and ``Comment``.
+Beautiful Soup은 복잡한 HTML 문서를 복잡한 Python 객체 트리로 변환합니다.
+하지만 ``Tag``, ``NavigableString``, ``BeautifulSoup``, ``Comment`` 의 단 4가지
+`종류` 의 객제만 다루면 됩니다.
 
 .. _Tag:
 
-``Tag``
--------
+``태그(Tag)``
+--------------
 
-A ``Tag`` object corresponds to an XML or HTML tag in the original document::
+``Tag`` 객체는 원본 문서의 XML 또는 HTML 태그에 해당합니다::
 
  soup = BeautifulSoup('<b class="boldest">Extremely bold</b>')
  tag = soup.b
  type(tag)
  # <class 'bs4.element.Tag'>
 
-Tags have a lot of attributes and methods, and I'll cover most of them
-in `Navigating the tree`_ and `Searching the tree`_. For now, the most
-important features of a tag are its name and attributes.
+태그는 다양한 속성(attribute)들과 메소드(method)들을 가지며, 대부분의 것들은
+`Navigating the tree`_ 와 `Searching the tree`_ 에서 다루게 될 것입니다.
+지금으로서는 가장 중요한 Tag의 특성은 이름과 속성입니다.
 
-Name
-^^^^
+이름(Name)
+^^^^^^^^^^
 
-Every tag has a name, accessible as ``.name``::
+모든 태그에는 이름이 있으며, ``.name`` 으로 접근 가능합니다::
 
  tag.name
  # u'b'
 
-If you change a tag's name, the change will be reflected in any HTML
-markup generated by Beautiful Soup::
+만약 태그의 이름을 변경하면, Beautiful Soup에 의해 생성된 HTML 마크업(markup)에도
+반영됩니다::
 
  tag.name = "blockquote"
  tag
  # <blockquote class="boldest">Extremely bold</blockquote>
 
-Attributes
-^^^^^^^^^^
+속성(Attributes)
+^^^^^^^^^^^^^^^^^
 
-A tag may have any number of attributes. The tag ``<b
-id="boldest">`` has an attribute "id" whose value is
-"boldest". You can access a tag's attributes by treating the tag like
-a dictionary::
+하나의 태그는 많은 속성을 가질 수 있습니다. ``<b id="boldest">`` 태그는
+값이 "boldest"인 "id"라는 속성을 갖고 있습니다. 태그를 사전(dict)처럼 처리하면
+태그의 속성에 접근할 수 있습니다::
 
  tag['id']
  # u'boldest'
 
-You can access that dictionary directly as ``.attrs``::
+해당 사전에 ``.attrs`` 로 직접 접근할 수 있습니다::
 
  tag.attrs
  # {u'id': 'boldest'}
 
-You can add, remove, and modify a tag's attributes. Again, this is
-done by treating the tag as a dictionary::
+태그의 속성을 더하거나 삭제하거나, 변경할 수 있습니다. 다시 말하지만, 이것은
+태그를 사전처럼 취급함으로써 가능합니다::
 
  tag['id'] = 'verybold'
  tag['another-attribute'] = 1
@@ -380,15 +370,15 @@ done by treating the tag as a dictionary::
 
 .. _multivalue:
 
-Multi-valued attributes
-&&&&&&&&&&&&&&&&&&&&&&&
+다중 값 속성 (Multi-valued Attribute)
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-HTML 4 defines a few attributes that can have multiple values. HTML 5
-removes a couple of them, but defines a few more. The most common
-multi-valued attribute is ``class`` (that is, a tag can have more than
-one CSS class). Others include ``rel``, ``rev``, ``accept-charset``,
-``headers``, and ``accesskey``. Beautiful Soup presents the value(s)
-of a multi-valued attribute as a list::
+HTML 4는 여러 값을 가질 수 있는 일부 속성들을 정의합니다. HTML 5는 두어개를
+제거했지만, 몇 개를 더 정의하였습니다. 가장 흔한 다중 값 속성은 ``class`` 입니다.
+(이것은 하나의 태그가 1개 이상의 CSS 클래스를 가질 수 있다는 것을 뜻합니다.)
+그 외에도 ``rel``, ``rev``, ``accept-charset``, ``headers``, ``accesskey`` 등이
+있습니다. Beautiful Soup은 다중 값 속성(Multi-valued Attribute)의 값들을
+목록(list)으로 표현합니다::
 
  css_soup = BeautifulSoup('<p class="body"></p>')
  css_soup.p['class']
@@ -398,16 +388,15 @@ of a multi-valued attribute as a list::
  css_soup.p['class']
  # ["body", "strikeout"]
 
-If an attribute `looks` like it has more than one value, but it's not
-a multi-valued attribute as defined by any version of the HTML
-standard, Beautiful Soup will leave the attribute alone::
+속성이 하나 이상의 값을 갖는 것처럼 `보이지만` 어떤 버전의 HTML 표준에서도
+다중 값 속성으로 정의된 적이 없는 속성이라면, Beautiful Soup은 해당 속성을
+그대로 둡니다::
 
  id_soup = BeautifulSoup('<p id="my id"></p>')
  id_soup.p['id']
  # 'my id'
 
-When you turn a tag back into a string, multiple attribute values are
-consolidated::
+태그를 다시 문자열로 변환하면, 다중 속성 값은 통합됩니다::
 
  rel_soup = BeautifulSoup('<p>Back to the <a rel="index">homepage</a></p>')
  rel_soup.a['rel']
@@ -416,13 +405,13 @@ consolidated::
  print(rel_soup.p)
  # <p>Back to the <a rel="index contents">homepage</a></p>
 
-You can use ```get_attribute_list`` to get a value that's always a list,
-string, whether or not it's a multi-valued atribute
+``get_attribute_list`` 를 사용하면 다중 속성 값을 갖는 속성이든 아니든 항상 목록,
+문자열인 값을 갖습니다.
 
   id_soup.p.get_attribute_list('id')
   # ["my id"]
 
-If you parse a document as XML, there are no multi-valued attributes::
+문서를 XML로 파싱할 경우에는 다중 값 속성이 없습니다::
 
  xml_soup = BeautifulSoup('<p class="body strikeout"></p>', 'xml')
  xml_soup.p['class']
@@ -430,8 +419,8 @@ If you parse a document as XML, there are no multi-valued attributes::
 
 
 
-``NavigableString``
--------------------
+``NavigableString`` (탐색 가능한 문자열)
+-----------------------------------------
 
 A string corresponds to a bit of text within a tag. Beautiful Soup
 uses the ``NavigableString`` class to contain these bits of text::
@@ -1809,7 +1798,7 @@ document.
 Changing tag names and attributes
 ---------------------------------
 
-I covered this earlier, in `Attributes`_, but it bears repeating. You
+I covered this earlier, in `속성(Attributes)`_, but it bears repeating. You
 can rename a tag, change the values of its attributes, add new
 attributes, and delete attributes::
 
@@ -2204,7 +2193,7 @@ Unicode characters to HTML entities whenever possible::
  #  </body>
  # </html>
 
- If you pass in ``formatter="html5"``, it's the same as
+If you pass in ``formatter="html5"``, it's the same as
 ``formatter="html5"``, but Beautiful Soup will
 omit the closing slash in HTML void tags like "br"::
 
@@ -2353,7 +2342,7 @@ specifying one of the following:
   options are "lxml", "html5lib", and "html.parser" (Python's
   built-in HTML parser).
 
-The section `Installing a parser`_ contrasts the supported parsers.
+The section `파서(Parser) 설치`_ contrasts the supported parsers.
 
 If you don't have an appropriate parser installed, Beautiful Soup will
 ignore your request and pick a different parser. Right now, the only
@@ -2871,7 +2860,7 @@ Soup. This is not because Beautiful Soup is an amazingly well-written
 piece of software. It's because Beautiful Soup doesn't include any
 parsing code. Instead, it relies on external parsers. If one parser
 isn't working on a certain document, the best solution is to try a
-different parser. See `Installing a parser`_ for details and a parser
+different parser. See `파서(Parser) 설치`_ for details and a parser
 comparison.
 
 The most common parse errors are ``HTMLParser.HTMLParseError:
@@ -3059,7 +3048,7 @@ You need a parser
 Beautiful Soup 3 used Python's ``SGMLParser``, a module that was
 deprecated and removed in Python 3.0. Beautiful Soup 4 uses
 ``html.parser`` by default, but you can plug in lxml or html5lib and
-use that instead. See `Installing a parser`_ for a comparison.
+use that instead. See `파서(Parser) 설치`_ for a comparison.
 
 Since ``html.parser`` is not the same parser as ``SGMLParser``, you
 may find that Beautiful Soup 4 gives you a different parse tree than
